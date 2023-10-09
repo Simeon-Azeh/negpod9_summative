@@ -2,6 +2,7 @@
 
 # Define the filename for storing student records
 filename="students-list_0923.txt"
+emails_file="student-emails.txt"
 
 # Function to create a student record
 create_student() {
@@ -61,6 +62,12 @@ update_student() {
     fi
 }
 
+#Function to select just the emails of the students and save them in a file 
+select_emails() {
+	cut -d '' -f 1 "$students_file" > "$emails_file"
+	echo "Emails of the students saved in $emails_file"
+}	
+
 # Main menu
 while true; do
     echo "Main Menu:"
@@ -68,9 +75,10 @@ while true; do
     echo "2. View All Students"
     echo "3. Delete Student"
     echo "4. Update Student Record"
-    echo "5. Exit"
+    echo "5. Select emails of students"
+    echo "6. Exit"
     read choice
-
+ 
     case "$choice" in
     1)
         create_student
@@ -84,7 +92,11 @@ while true; do
     4)
         update_student
         ;;
-    5)
+
+    5)  select_email
+        ;;
+
+    6)
         echo "Exiting the application."
         exit 0
         ;;
